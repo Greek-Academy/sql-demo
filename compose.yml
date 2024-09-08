@@ -1,39 +1,24 @@
-version: "3"
-
 services:
-  # Database
-  db:
+  mysql:
+    image: mysql:8.0.27
     platform: linux/x86_64
-    image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: yourdb
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
       MYSQL_PASSWORD: password
-    networks:
-      - mysql-phpmyadmin
-
-  # phpmyadmin
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - db-data:/var/lib/mysql
   phpmyadmin:
-    depends_on:
-      - db
     image: phpmyadmin
-    restart: always
+    depends_on:
+      - mysql
+    environment:
+      - PMA_HOSTS=mysql
     ports:
       - "8090:80"
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: password
-    networks:
-      - mysql-phpmyadmin
-
-networks:
-  mysql-phpmyadmin:
-
 volumes:
-  db_data:
-  
+  db-data:

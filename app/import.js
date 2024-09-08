@@ -57,8 +57,6 @@ require('dotenv').config();
         // Do nothing here
         break;
     }
-    
-    break;
   }
   
   process.exit();

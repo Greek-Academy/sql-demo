@@ -3,6 +3,7 @@ const mysql = require('mysql2/promise');
 const { EurfImporter } = require('./eurf-importer');
 require('dotenv').config();
 
+
 (async () => {
 
   // データベースへの接続
@@ -13,6 +14,7 @@ require('dotenv').config();
       password: process.env.DB_PASSWORD
     }
   );
+
   console.log(`connected`);
 
   // データベースの作成

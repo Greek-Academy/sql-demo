@@ -4,7 +4,7 @@ const { Writable } = require('node:stream');
 const csv = require('csv-parser');
 const { pipeline } = require('node:stream/promises');
 
-export class EurfImporter extends Writable {
+class EurfImporter extends Writable {
   tableName = '';
   conn = null;
 
@@ -82,3 +82,7 @@ export class EurfImporter extends Writable {
     // await params.conn.query('....');
   }
 }
+
+module.exports = {
+  EurfImporter,
+};
